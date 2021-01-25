@@ -5,6 +5,7 @@
 
 * [can-utils](https://github.com/linux-can/can-utils)
 * [ICSim](https://github.com/zombieCraig/ICSim)
+* [Python3](https://www.python.org/)
 
 ***
 
@@ -33,7 +34,7 @@
  ```
 
 
- ***Thanks to linux-can & [@zombieCraig](https://github.com/zombieCraig) for ICSim***
+ ***Thanks to [@zombieCraig](https://github.com/zombieCraig) for ICSim***
  
  
 ### 🤝 Connect with me
