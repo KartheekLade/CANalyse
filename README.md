@@ -34,7 +34,7 @@
  ```
 
 
- ***Thanks to [@zombieCraig](https://github.com/zombieCraig) for ICSim***
+ ***Thanks to [@zombieCraig](https://github.com/zombieCraig) for ICSim & linux-can.***
  
  
 ### 🤝 Connect with me
