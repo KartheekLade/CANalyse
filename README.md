@@ -4,7 +4,7 @@
 ### Requirements:
 
 * [can-utils](https://github.com/linux-can/can-utils)
-* [ICSim - Car Simulation](https://github.com/zombieCraig/ICSim)
+* [ICSim](https://github.com/zombieCraig/ICSim)
 
 ***
 
