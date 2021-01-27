@@ -1,5 +1,5 @@
 <h1 align="center"> <b>CANalyse</b></h1>
-<h3 align="center"><b>A automated tool for car hacking</b></h3> 
+<h3 align="center"><b></b></h3> 
 
 ### Requirements:
 
@@ -22,7 +22,7 @@
  ```
  ***
  
- + **Installation of CANghost :**
+ + **Installation of CANalyse :**
  ```
  git clone https://github.com/KartheekLade/CANalyse.git
  ```
