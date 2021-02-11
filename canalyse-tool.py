@@ -30,6 +30,13 @@ settings = {
 	'color': "cyan"
 }
 
+try:
+    import pyfiglet as pf
+except:
+    os.system('pip3 install pyfiglet==0.7')
+    os.system('clear')
+    import pyfiglet as pf 
+
 def logo():
 	print("")
 	result = pf.figlet_format("CANalyse", font = "slant" ) 
