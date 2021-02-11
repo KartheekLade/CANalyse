@@ -47,6 +47,9 @@ def logo():
 def main_menu():
 	while True:
 		os.system('clear')
+		logo()
+		print("")
+		print("**************** Main menu *******************")
 		print("")
 		tc.cprint("1) CANalyse",settings['color'])
 		tc.cprint("2) Connect to Telegram",settings['color'])
