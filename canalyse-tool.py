@@ -30,6 +30,12 @@ settings = {
 	'color': "cyan"
 }
 
+def logo():
+	print("")
+	result = pf.figlet_format("CANalyse", font = "slant" ) 
+	print(result)
+	print("")
+
 
 def main_menu():
 	while True:
@@ -49,8 +55,9 @@ def main_menu():
 def canalyse_menu():
 	while True:
 		os.system('clear')
+		logo()
 		print("")
-		print("**************** CANalyse *******************")
+		print("**************** CANalyse menu *******************")
 		print("")
 		tc.cprint("1) Capture source",settings['color'])
 		tc.cprint("2) Capture primary attack",settings['color'])
@@ -69,8 +76,9 @@ def canalyse_menu():
 def settings_menu():
 	while True:
 		os.system('clear')
+		logo()
 		print("")
-		print("            settings          ")
+		print("*****************settings*****************")
 		print("")
 		tc.cprint("1) Comm_channel : "+settings['comm_channel'],settings['color'])
 		tc.cprint("2) Color : "+settings['color'],settings['color'])
@@ -93,6 +101,7 @@ def manual():
 	f.close()
 	while True:
 		os.system('clear')
+		logo()
 		print(c)
 		print("1) Exit")
 		try:
@@ -120,7 +129,7 @@ def stop_action(a):
 def show_id(l):
 	while True:
 		os.system('clear')
-		#print(df7)
+		logo()
 		print("************Suspected ids*****************")
 		tc.cprint("0) play all",settings['color'])
 		tc.cprint("1) exit",settings['color'])
