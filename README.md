@@ -4,8 +4,9 @@
 ### Requirements:
 
 * [can-utils](https://github.com/linux-can/can-utils)
-* [ICSim](https://github.com/zombieCraig/ICSim)
 * [Python3](https://www.python.org/)
+* [pip3]
+
 
 ***
 
@@ -29,7 +30,7 @@
  + **Usage:**
  ```
  cd CANalyse/
- python3 CANanalyse.py
+ python3 canalyse-tool.py
  ```
 
 #### Still Updating ...
