@@ -1,7 +1,7 @@
 <h1 align="center"> <b>CANalyse</b></h1>
 <h3 align="center"><b></b></h3> 
 
- CANalyse is a tool built to analyse the log files to find out unique dataset's and able to connect to simple user interfaces such as Telegram. Basically, while using this tool you can provide your bot-ID and be able to use the tool over internet through telegram.
+CANalyse is a tool built to analyze the log files to find out unique datasets automatically and able to connect to simple user interfaces such as Telegram. Basically, while using this tool you can provide your bot-ID and be able to use the tool over the internet through telegram.
 
 
 ### Requirements:
