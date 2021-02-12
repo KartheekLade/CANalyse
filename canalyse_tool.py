@@ -274,8 +274,10 @@ def telegram_play(bot,msg,filename,cn,can_id=None):
 		df = df.loc[df.id==can_id]
 		df = df.reset_index()
 		print(df)
-		cn.write(df,settings['payload'])
-	cn.canplay(filename)
+		cn.write(df,'payload_id.log')
+		cn.canplay('payload_id.log')
+	else:
+		cn.canplay(filename)
 	bot.send_message(chat_id=chat_id,text="payload execution completed !")
 
 
