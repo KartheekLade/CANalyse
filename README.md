@@ -11,21 +11,7 @@
 * pip3
 
 
-***
 
-#### can-utils is a Linux utility that enables Linux to communicate with the communication network of vehicle's. 
-- cansniffer is used to sniff the traffic.
-- cansend is used to upload a set of packets to communication channel.
- candump is used to dump the traffic.
-- canplayer is used play the traffic logs.
-- cangen is used to upload random packets to the communication channel. 
-
- 
- ## can-utils can be installed via apt-get
- ```
- sudo apt-get install can-utils -y
- ```
- ***
  
  ## Installation of CANalyse:
  ```
