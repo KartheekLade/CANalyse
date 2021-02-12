@@ -26,14 +26,12 @@ class Canalyse():
             else:
                 t_end = time.time() + 600 #max time limit
             lgr = Logger(filename)
-            log = []
             while time.time() < t_end:
                 msg = self.bus.recv(1)
                 if msg is not None:
-                    log.append(msg)
                     lgr(msg)
-        except Exception as e:
-            print(e)
+        except:
+            pass
             
 
     def canplay(self,filename):
