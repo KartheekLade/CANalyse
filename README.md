@@ -6,7 +6,7 @@
 
 ### Requirements:
 
-* [can-utils](https://github.com/linux-can/can-utils)
+
 * [Python3](https://www.python.org/)
 * pip3
 
