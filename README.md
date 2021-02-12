@@ -36,9 +36,9 @@ Note:
 * Code is constantly being updated for fixing the bugs, Errorhandling and smooth experience. If you face any problems send a DM, I will be happy to help as much as I can.
 * Thanks to developers who created python-can and other libraries used in this tool <3 
  
-Warning !
+Warning :warning:  !
 ----
-* This tool is purely for learning and educational purposes only. I'm not responsibale for any actions.
+* This tool is purely for learning and educational purposes only. I and the contributors are not responsibale for any harmful actions.
 
 ### 🤝 Connect with me
 
