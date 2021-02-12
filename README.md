@@ -36,7 +36,7 @@
  ```
  cd CANalyse/
 
- python3 canalyse-tool.py
+ python3 canalyse_tool.py
  ```
 Troubleshooting
 ---------------
