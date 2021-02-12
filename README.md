@@ -30,6 +30,8 @@
  ## Installation of CANalyse:
  ```
  git clone https://github.com/KartheekLade/CANalyse.git
+ cd CANalyse
+ pip3 install -r requirements.txt
  ```
  Usage
 ---------------
