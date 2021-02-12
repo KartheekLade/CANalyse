@@ -23,7 +23,6 @@
 ---------------
  ```
  cd CANalyse/
-
  python3 canalyse_tool.py
  ```
 Troubleshooting
@@ -34,8 +33,8 @@ Troubleshooting
 
 Note:
 -------------
-* Code is constantly being updated for fixing the bugs, errorhandling and smooth experience. if you face any problems send a DM, i will be happy to help as mucha s i can.
-* Thanks to developers who created linux-can and other libraries used int his tool <3 
+* Code is constantly being updated for fixing the bugs, Errorhandling and smooth experience. If you face any problems send a DM, I will be happy to help as much as I can.
+* Thanks to developers who created python-can and other libraries used in this tool <3 
  
 Warning !
 ----
