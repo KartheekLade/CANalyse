@@ -49,7 +49,8 @@ Next Updates (In process)
 
 Explained here !
 ----------
-* [Blog](https://kartheeklade.medium.com/what-is-canalyse-and-how-do-i-control-hack-cars-through-telegram-part-1-de358640becf)
+* [Medium Blog](https://kartheeklade.medium.com/what-is-canalyse-and-how-do-i-control-hack-cars-through-telegram-part-1-de358640becf)
+* [Youtube](https://youtu.be/s5WGn3rwzKk)
 
 Note:
 -------------
