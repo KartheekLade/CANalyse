@@ -223,17 +223,6 @@ def get_new_message(bot,update_id=None):
 		except:
 			pass
 
-'''
-candump source
-candump attack
-candump sec_attack
-
-analyse source attack sec_attack
-	refine source attack
-	match attack sec_attack
-play file
-show file
-'''
 
 def upload(bot,msg,filename):
 	chat_id = msg.message.chat_id
