@@ -9,9 +9,10 @@ CANalyse is a tool built to analyze the log files to find out unique datasets au
 
 <h1 align="center"> <b>Tool Layout</b></h1>
 <p align="center">
-  <img  width="390" src="toollayout.png" />
+  <img  width="#" src="toollayout.png" />
 </p>
-### Requirements:
+
+ ## Requirements:
 
 
 * [Python3](https://www.python.org/)
