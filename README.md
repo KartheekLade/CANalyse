@@ -1,7 +1,7 @@
 <h1 align="center"> <b>CANalyse</b></h1>
 <h3 align="center"><b></b></h3> 
 <p align="center">
-  <img  width="390" src="introduction.png" />
+  <img  width="700" src="introduction.png" />
 </p>
 
 CANalyse is a tool built to analyze the log files to find out unique datasets automatically and able to connect to simple user interfaces such as Telegram. Basically, while using this tool the attacker can provide a bot-ID and use the tool over the internet through telegram-bot. CANalyse is made to be placed inside a raspberry-PI and able to exploit the vehicle through a telegram bot by recording and analysing the network traffic/data logs, like a hardware backdoor planted in a car.
@@ -9,7 +9,7 @@ CANalyse is a tool built to analyze the log files to find out unique datasets au
 
 <h1 align="center"> <b>Tool Layout</b></h1>
 <p align="center">
-  <img  width="#" src="toollayout.png" />
+  <img  width="700" src="toollayout.png" />
 </p>
 
  ## Requirements:
