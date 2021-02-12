@@ -47,6 +47,9 @@ Next Updates (In process)
 * Making a common settings in bot CLI and Bot.
 * Ability to record and download multiple files.
 
+Explained here !
+----------
+* [Blog](https://kartheeklade.medium.com/what-is-canalyse-and-how-do-i-control-hack-cars-through-telegram-part-1-de358640becf)
 
 Note:
 -------------
