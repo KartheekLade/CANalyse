@@ -9,9 +9,12 @@ CANalyse is a tool built to analyze the log files to find out unique datasets au
 
 * [Python3](https://www.python.org/)
 * pip3
-
-
-
+* can-utils
+ 
+ ## can-utils installation
+ ```
+ sudo apt-get install can-utils -y
+ ```
  
  ## Installation of CANalyse:
  ```
