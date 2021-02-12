@@ -1,0 +1,5 @@
+pandas
+python-can
+python-telegram-bot
+termcolor
+pyfiglet==0.7
