@@ -9,6 +9,12 @@ CANalyse is a tool built to analyze the log files to find out unique datasets au
 A prerequisite to using this tool is that the Hardware implant is already installed in the car and capable of communicating with the Network/communication channels inside the vehicle.
 
 
+Explained here :information_source:
+----------
+* [Medium Blog](https://kartheeklade.medium.com/what-is-canalyse-and-how-do-i-control-hack-cars-through-telegram-part-1-de358640becf)
+* [Youtube](https://youtu.be/s5WGn3rwzKk)
+
+
 <h1 align="center"> <b>Tool Layout</b></h1>
 <p align="center">
   <img  width="700" src="toollayout.png" />
@@ -45,11 +51,6 @@ Next Updates (In process)
 * A secondary refinery proccess to get more concentrated payload, which will be optional to users.
 * Making a common settings in CLI and Bot.
 * Ability to record and download multiple files.
-
-Explained here :information_source:
-----------
-* [Medium Blog](https://kartheeklade.medium.com/what-is-canalyse-and-how-do-i-control-hack-cars-through-telegram-part-1-de358640becf)
-* [Youtube](https://youtu.be/s5WGn3rwzKk)
 
 Note:
 -------------
