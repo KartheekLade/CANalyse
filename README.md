@@ -54,7 +54,7 @@ Explained here !
 
 Note:
 -------------
-* Code is constantly being updated for fixing the bugs, Errorhandling and smooth experience. If you face any problems send a DM or raise a issue, We (I and the contributors) will be happy to help as much as I can.
+* Code is constantly being updated for fixing the bugs, Errorhandling and smooth experience. If you face any problems send a DM or raise a issue, We (I and the contributors) will be happy to help as much as we can.
 * Thanks to developers who created python-can and other libraries used in this tool <3 
  
 Warning :warning:  !
