@@ -247,10 +247,8 @@ def exec_message(bot,msg,cn):
 	elif text[0] == 'get' or text[0] == 'download':
 		upload(bot,msg,settings[text[1]])
 	elif text[0] == 'menu' or text[0] == 'whatcanido':
-		bot.send_message(chat_id=chat_id,text="'record (source / attack) (seconds)' to record the files ")
-		bot.send_message(chat_id=chat_id,text="'play no_of times filename can_id(optional)' to canplay")
-		bot.send_message(chat_id=chat_id,text="'analyse source attack' to analyse files")
-		bot.send_message(chat_id=chat_id,text="'get (source / attack / payload)' to download any file")
+		options = ["'record (source / attack) (seconds)' to record the files ","'play no_of times filename can_id(optional)' to canplay","'analyse source attack' to analyse files","'get (source / attack / payload)' to download any file"]
+		bot.send_message(chat_id=chat_id,text="\n".join(options))
 
 	else:
 		bot.send_message(chat_id=chat_id,text="Invalid command type 'Menu' for manual")
