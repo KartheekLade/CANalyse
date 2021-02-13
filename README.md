@@ -46,7 +46,7 @@ Next Updates (In process)
 * Making a common settings in CLI and Bot.
 * Ability to record and download multiple files.
 
-Explained here !
+Explained here :information_source:
 ----------
 * [Medium Blog](https://kartheeklade.medium.com/what-is-canalyse-and-how-do-i-control-hack-cars-through-telegram-part-1-de358640becf)
 * [Youtube](https://youtu.be/s5WGn3rwzKk)
@@ -54,7 +54,7 @@ Explained here !
 Note:
 -------------
 * Code is constantly being updated for fixing the bugs, Errorhandling and smooth experience. If you face any problems send a DM or raise a issue, We (I and the contributors) will be happy to help as much as we can.
-* Thanks to developers who created python-can and other libraries used in this tool :love:
+* Thanks (:heart:) to developers who created python-can and other libraries used in this tool.
  
 Warning :warning:  !
 ----
