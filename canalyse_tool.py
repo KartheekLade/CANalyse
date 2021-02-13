@@ -233,7 +233,10 @@ def get_new_message(bot,update_id=None):
 
 def upload(bot,msg,filename):
 	chat_id = msg.message.chat_id
-	bot.send_document(chat_id=chat_id,document=open(filename,'rb'))
+	if os.path.isfile(filename): 
+		bot.send_document(chat_id=chat_id,document=open(filename,'rb'))
+	else:
+		bot.send_message(chat_id=chat_id,text=str(filename)+" not present")
 
 def exec_message(bot,msg,cn):
 	text = msg.message.text
