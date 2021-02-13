@@ -28,7 +28,7 @@ settings = {
 	'sec_attack':'attack2.log',
 	'payload':'payload.log',
 	'color': "cyan",
-	'API_Token':None  #Insert the Telegram API Token here.
+	'API_Token':None  #Insert the Telegram API Token in string format here.
 }
 
 try:
@@ -217,10 +217,10 @@ def connect_to_Telegram():
 					z = input("Enter the telegram API token : ")
 			bot = Bot(token=z)
 			print("connected with telegram")
-			print("send commands to get started")
+			print("send 'menu' from telegram bot to see availiable options")
 			return bot
 		except:
-			print("Invalid token key , try again...")
+			print("Invalid API token key, try again...")
 def get_new_message(bot,update_id=None):
 	while  True:
 		try:
@@ -257,7 +257,7 @@ def exec_message(bot,msg,cn):
 	elif text[0] == 'get' or text[0] == 'download':
 		upload(bot,msg,settings[text[1]])
 	elif text[0] == 'menu' or text[0] == 'whatcanido':
-		options = ["'record (source / attack) (seconds)' to record the files ","'play no_of times filename can_id(optional)' to canplay","'analyse source attack' to analyse files","'get (source / attack / payload)' to download any file"]
+		options = ["'record (source / attack) (seconds)' to record the files ","'play (no_of times) (filename) (can_id {optional})' to play the recorded/analysed files","'analyse source attack' to analyse the files","'get (source / attack / payload)' to download any file"]
 		bot.send_message(chat_id=chat_id,text="\n".join(options))
 
 	else:
