@@ -236,7 +236,7 @@ def upload(bot,msg,filename):
 	if os.path.isfile(filename): 
 		bot.send_document(chat_id=chat_id,document=open(filename,'rb'))
 	else:
-		bot.send_message(chat_id=chat_id,text=str(filename)+" not present")
+		bot.send_message(chat_id=chat_id,text=str(filename)+" not available")
 
 def exec_message(bot,msg,cn):
 	text = msg.message.text
