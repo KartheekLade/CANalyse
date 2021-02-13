@@ -44,7 +44,7 @@ Troubleshooting
 Next Updates (In process)
 -------------------------
 * A secondary refinery proccess to get more concentrated payload, which will be optional to users.
-* Making a common settings in bot CLI and Bot.
+* Making a common settings in CLI and Bot.
 * Ability to record and download multiple files.
 
 Explained here !
