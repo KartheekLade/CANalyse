@@ -1,0 +1,59 @@
+﻿CANalyse
+
+
+A prerequisite to using this tool is that the Hardware implant is already installed in the car and capable of communicating with the CAN bus protocol inside the vehicle.
+
+
+Let’s assume we have a car in which we have connected with USBtin(or attacker choice), and USBtin(or attacker choice) is connected to Raspberry pi (with GSM module) and the pi can communicate on the internet.
+
+
+LInk to USBtin - https://www.fischl.de/usbtin/
+Link to GSM module - https://www.electronicscomp.com/sim900a-gsm-gprs-module-india
+
+
+Canalyse uses python-can library to sniff car information and analyze the gathered information and uses the analyzed information to command & control certain functions of the car.
+
+
+What is CANalyse?
+
+
+Once the above setup is ready, the USBtin(or attacker choice) can log the data packets in the vehicle’s network bus.
+CANalyse is a software tool built to analyze the log files to find out unique data sets automatically and able to connect to simple attacker interfaces such as Telegram. Basically, while using this tool you can provide your bot-ID and be able to use the tool over the internet through telegram. It is made to be installed inside a raspberry-PI and able to exploit the vehicle through a telegram bot by recording and analyzing the data logs, it is like a hardware implant planted inside a car which acts as a bridge between the Telegram bot and the Vehicle’s network.
+
+
+
+How can CANalyse help in attacking vehicles?
+
+
+At any given point in time, there are thousands of requests going on in the can network. CANalyse will capture the traffic and extract the unique actions and corresponding dataset. Now, this dataset can be used to control car from the telegram bot.
+
+In cars, the communication happens on protocols like CANbus and its variants. the physical activities such as Brakes, Signals, steering, etc are being handled by the Electronic Control Unit (Ecu’s) which take actions, according to a can data packet’s they receive.
+
+
+Each data packet contains an ID and Data field. Ecu’s are preprogrammed to act according to data it receives. It resolves to if we have the correct ID and Correct data to impose a specific physical activity, the purpose of CANalyse to identify those specific data packets (ID & Data).
+
+
+This data is stored in the Raspberry PI and we can inject that data packet and control the vehicle from the telegram bot.
+
+
+This basically happens because of the mutual trust between the Ecu’s.
+While the attacker is using CANalyse he/she needs to 
+1. record a source log file that contains data other than the intended action (example: brakes are not applied) 
+2. record an attack log file (in which the brakes are applied).
+3. “Analyse source attack” which refines the payload file.
+4. Play the payload file.
+
+
+the analyze function in the tool can identify the data packets which are unique in the attack file by comparing them with the source file, which means it can narrow down the specific packets. CANbus is a very robust protocol and sometimes it updates the data in milliseconds. 
+
+
+In short, using CANalyse the attacker can sniff the CAN network, analyze, and replay the payload using the telegram bot.
+
+
+Technical details:
+
+
+I have used the python-can library in this tool at the base and developed a function using that since it supports various communication interfaces and makes the tool flexible to be used with different hardware. for filtering and analyzing I have used the panda’s library, it is used to convert the data to data frames and analyzing them in a faster way. The python-telegram-bot is used to access and communicate with a telegram bot.
+
+
+For more information, please refer CANalyse GitHub repository:  (https://github.com/KartheekLade/CANalyse)
