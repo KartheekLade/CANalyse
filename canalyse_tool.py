@@ -27,7 +27,8 @@ settings = {
 	'attack':'attack.log',
 	'sec_attack':'attack2.log',
 	'payload':'payload.log',
-	'color': "cyan"
+	'color': "cyan",
+	'API_Token':None
 }
 
 try:
@@ -207,7 +208,10 @@ def play_payload(cn):
 def connect_to_Telegram():
 	while True:
 		try:
-			z = input("Enter the telegram API token : ")
+			if settins['API_Token'] == None:
+				z = input("Enter the telegram API token : ")
+			else:
+				z = settins['API_Token']
 			bot = Bot(token=z)
 			print("connected with telegram")
 			print("send commands to get started")
