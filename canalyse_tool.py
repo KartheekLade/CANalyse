@@ -106,7 +106,7 @@ def settings_menu():
 			continue
 
 def manual():
-	f = open('man.txt')
+	f = open('maanual.txt')
 	c = f.read()
 	f.close()
 	while True:
