@@ -42,7 +42,7 @@ Explained here :information_source:
  ```
 Troubleshooting
 ---------------
-* If the tool dumps "No such device" error or you can't view any traffic, check if the iterface & communication channel in settings.
+* If the tool dumps "No such device" error or you can't view any traffic, check if the interface & communication channel in settings.
 * if the auto installation of required libraries didn't work try running with sudo once or install them manually. 
 * If you are not able to execute commands properly, do check the " menu ".
 
