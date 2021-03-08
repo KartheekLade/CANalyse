@@ -13,7 +13,7 @@ from can import Bus,BusState,Logger,LogReader,MessageSync
 import time
 
 class Canalyse():
-    def __init__(self,channel,interface):#channel,bustype):
+    def __init__(self,channel,interface):#channel= can0?, interface = USB2CAN?
         self.channel = channel
         self.config = {}
         self.config['interface'] = interface
@@ -22,9 +22,9 @@ class Canalyse():
 
         try:
             if int(secs) != 0:
-                t_end = time.time() + int(secs)
+                t_end = time.time() + int(secs) # chiplevelclocktime + mentioned time.
             else:
-                t_end = time.time() + 600 #max time limit
+                t_end = time.time() + 600 #max time limit.
             lgr = Logger(filename)
             while time.time() < t_end:
                 msg = self.bus.recv(1)
@@ -34,7 +34,7 @@ class Canalyse():
             pass
             
 
-    def canplay(self,filename):
+    def canplay(self,filename): # playing data from file.
         reader = LogReader(filename)
         in_sync = MessageSync(reader)
         for m in in_sync:
@@ -42,7 +42,8 @@ class Canalyse():
                 continue
             print(m)
             self.bus.send(m)
-    def read(self,filename):
+            
+    def read(self,filename): # getiing unique data from file for analysing purposes.
         with open( filename , 'r+' )  as  file:
             log = file.readlines()
             data = pd.DataFrame(columns=['timestamp','channel','id','data'])
@@ -59,7 +60,7 @@ class Canalyse():
       
         return data
 
-    def write(self,df,filename='payload.log'):
+    def write(self,df,filename='payload.log'): # converting our format to logfile format.
         with open(filename,'w+') as file:
             for i in range(df.shape[0]):
                 m = [df.loc[i,'timestamp'],df.loc[i,'channel'],df.loc[i,'id']+'#'+df.loc[i,'data']+'\n']
