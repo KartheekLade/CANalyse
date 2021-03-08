@@ -28,7 +28,7 @@ settings = {
 	'sec_attack':'attack2.log',
 	'payload':'payload.log',
 	'color': "cyan",
-	'API_Token':None  #Insert the Telegram API Token in string format here.
+	'API_Token':None  #Insert the Telegram API Token in string format here, to hardcode the API.
 }
 
 try:
