@@ -28,6 +28,8 @@ settings = {
 	'sec_attack':'attack2.log',
 	'payload':'payload.log',
 	'color': "cyan",
+	'append_mode':'on',
+	'filemode':'w+',
 	'API_Token':None  #Insert the Telegram API Token in string format here, to hardcode the API.
 }
 
@@ -186,13 +188,13 @@ def analysis(cn):
 			break
 		elif z == 0:
 			print("writing payload")
-			cn.write(df7,settings['payload'])
+			cn.write(df7,settings['filemode'],settings['payload'])
 			play_payload(cn)
 		elif z < len(l)+2:
 			print("writing payload")
 			df4 = df3.loc[df3.id==l[z-2]]
 			df4 = df4.reset_index()
-			cn.write(df4,settings['payload'])
+			cn.write(df4,settings['filemode'],settings['payload'])
 				
 
 
@@ -282,7 +284,7 @@ def telegram_play(bot,msg,filename,cn,can_id=None):
 		df = df.loc[df.id==can_id]
 		df = df.reset_index()
 		print(df)
-		cn.write(df,'payload_id.log')
+		cn.write(df,settings['filemode'],'payload_id.log')
 		cn.canplay('payload_id.log')
 	else:
 		cn.canplay(filename)
@@ -297,7 +299,7 @@ def telegram_analyse(bot,msg,source,attack,cn):
 	source = cn.read(source)
 	attack = cn.read(attack)
 	payload = cn.refine(source,attack)
-	cn.write(payload,settings['payload'])
+	cn.write(payload,settings['filemode'],settings['payload'])
 	bot.send_message(chat_id=chat_id,text="analysis completed")
 	bot.send_message(chat_id=chat_id,text="written payload at "+settings['payload'])
 	bot.send_message(chat_id=chat_id,text="Suspected IDs are")
@@ -377,7 +379,19 @@ def main():
 				elif p == 7:
 					pl = input("Interface type : ")
 					settings['interface'] = pl
-				elif p == 8:
+				elif p== 8:
+					while True:
+						pl = input("Append mode (on/off) : ")
+						if pl=='on':
+							settings['filemode'] = 'a+'
+							break
+						elif pl=='off':
+							settings['filemode'] = 'w+'
+							break
+						else:
+							print('Type "on" or "off"')
+						
+				elif p == 9:
 					show_exit()
 					break
 

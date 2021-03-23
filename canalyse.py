@@ -60,8 +60,8 @@ class Canalyse():
       
         return data
 
-    def write(self,df,filename='payload.log'): # converting our format to logfile format.
-        with open(filename,'w+') as file:
+    def write(self,df,filemode,filename): # converting our format to logfile format.
+        with open(filename,filemode) as file:
             for i in range(df.shape[0]):
                 m = [df.loc[i,'timestamp'],df.loc[i,'channel'],df.loc[i,'id']+'#'+df.loc[i,'data']+'\n']
                 t = " ".join(m)
