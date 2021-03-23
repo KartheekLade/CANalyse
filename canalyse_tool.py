@@ -28,8 +28,9 @@ settings = {
 	'sec_attack':'attack2.log',
 	'payload':'payload.log',
 	'color': "cyan",
-	'append_mode':'on',
+	'append_mode':'off',
 	'filemode':'w+',
+	'recordmode':'off',
 	'API_Token':None  #Insert the Telegram API Token in string format here, to hardcode the API.
 }
 
@@ -100,7 +101,9 @@ def settings_menu():
 		tc.cprint("5) secondary attack filename : "+settings['sec_attack'],settings['color'])
 		tc.cprint("6) Payload filename : "+settings['payload'],settings['color'])
 		tc.cprint("7) Interface : "+settings['interface'],settings['color'])
-		tc.cprint("8) Exit",settings['color'])
+		tc.cprint("8) Append mode : "+settings['append_mode'],settings['color'])
+		tc.cprint("9) Record mode : "+settings['recordmode'],settings['color'])
+		tc.cprint("10) Exit",settings['color'])
 		print("")
 		try:
 			z = int(input("=====> "))
@@ -159,14 +162,14 @@ def show_id(l):
 def analysis(cn):
 	print(" analysing source ...")
 	try:
-		df1 = cn.read(settings['source'])
+		df1 = cn.read(settings['source'],settings['recordmode'])
 	except:
 		print(settings['source']+" file not available")
 		start_action('Main menu')
 		return
 	print(" analysing attack ...")
 	try:
-		df2 = cn.read(settings['attack'])
+		df2 = cn.read(settings['attack'],settings['recordmode'])
 	except:
 		print(settings['attack']+" file not available")
 		start_action('Main menu')
@@ -174,7 +177,7 @@ def analysis(cn):
 	df3 = cn.refine(df1,df2)
 	l = cn.unique_ids(df3)
 	try:
-		df5 = cn.read(settings['sec_attack'])
+		df5 = cn.read(settings['sec_attack'],settings['recordmode'])
 		df6 = cn.refine(df1,df5)
 		df7 = cn.match(df3,df6)
 		l = cn.unique_ids(df7)
@@ -296,8 +299,8 @@ def telegram_play(bot,msg,filename,cn,can_id=None):
 def telegram_analyse(bot,msg,source,attack,cn):
 	chat_id = msg.message.chat_id
 	bot.send_message(chat_id=chat_id,text="analysis started")
-	source = cn.read(source)
-	attack = cn.read(attack)
+	source = cn.read(source,settings['recordmode'])
+	attack = cn.read(attack,settings['recordmode'])
 	payload = cn.refine(source,attack)
 	cn.write(payload,settings['filemode'],settings['payload'])
 	bot.send_message(chat_id=chat_id,text="analysis completed")
@@ -381,17 +384,37 @@ def main():
 					settings['interface'] = pl
 				elif p== 8:
 					while True:
-						pl = input("Append mode (on/off) : ")
-						if pl=='on':
-							settings['filemode'] = 'a+'
-							break
-						elif pl=='off':
-							settings['filemode'] = 'w+'
-							break
-						else:
+						try:
+							pl = input("Append mode (on/off) : ")
+							if pl=='on':
+								settings['filemode'] = 'a+'
+								settings['append_mode'] = 'on'
+								break
+							elif pl=='off':
+								settings['filemode'] = 'w+'
+								settings['append_mode'] = 'off'
+								break
+							else:
+								print('Type "on" or "off"')
+						except:
 							print('Type "on" or "off"')
-						
 				elif p == 9:
+					while True:
+						try:
+							pl = input("Record mode (on/off) : ")
+							if pl=='on':
+								settings['recordmode'] = 1
+								break
+							elif pl=='off':
+								settings['recordmode'] = 0
+								break
+							else:
+								print('Type "on" or "off"')
+						except:
+							print('Type "on" or "off"')
+
+						
+				elif p == 10:
 					show_exit()
 					break
 

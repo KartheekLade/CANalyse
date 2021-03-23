@@ -43,7 +43,7 @@ class Canalyse():
             print(m)
             self.bus.send(m)
             
-    def read(self,filename): # getiing unique data from file for analysing purposes.
+    def read(self,filename,recordmode): # getiing unique data from file for analysing purposes.
         with open( filename , 'r+' )  as  file:
             log = file.readlines()
             data = pd.DataFrame(columns=['timestamp','channel','id','data'])
@@ -57,7 +57,8 @@ class Canalyse():
                         data.at[data.shape[0]] = res
                 except:
                     pass
-      
+        if recordmode == 'on':
+            Canalyse.write(data,'a+','db.log')
         return data
 
     def write(self,df,filemode,filename): # converting our format to logfile format.
