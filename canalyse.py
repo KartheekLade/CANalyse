@@ -38,7 +38,7 @@ class Canalyse():
         reader = LogReader(filename)
         in_sync = MessageSync(reader)
         for m in in_sync:
-            if m.is_error_frame and not error_frames:
+            if m.is_error_frame:
                 continue
             print(m)
             self.bus.send(m)
