@@ -1,3 +1,4 @@
+from logging import exception
 import os
 import threading
 try:
@@ -19,19 +20,22 @@ except:
     os.system('clear')
     import termcolor as tc
 from canalyse import Canalyse
+if not os.path.isdir(os.getcwd()+'/data'):
+	os.mkdir(os.getcwd()+'/data')
+
 
 settings = {
 	'comm_channel' : 'vcan0',
 	'interface':'socketcan',
-	'source':'source.log',
-	'attack':'attack.log',
-	'sec_attack':'attack2.log',
-	'payload':'payload.log',
+	'source':'data/source.log',
+	'attack':'data/attack.log',
+	'sec_attack':'data/attack2.log',
+	'payload':'data/payload',
 	'color': "cyan",
 	'append_mode':'off',
 	'filemode':'w+',
-	'recordmode':'off',
-	'API_Token':None  #Insert the Telegram API Token in string format here, to hardcode the API.
+	'recordmode':'on',
+	'API_Token':''  #Insert the Telegram API Token in string format here, to hardcode the API.
 }
 
 try:
@@ -94,13 +98,13 @@ def settings_menu():
 		print("")
 		print("*****************settings*****************")
 		print("")
-		tc.cprint("1) Comm_channel : "+settings['comm_channel'],settings['color'])
+		tc.cprint("1) Communication channel : "+settings['comm_channel'],settings['color'])
 		tc.cprint("2) Color : "+settings['color'],settings['color'])
 		tc.cprint("3) source filename : "+settings['source'],settings['color'])
-		tc.cprint("4) primary attack filename : "+settings['attack'],settings['color'])
-		tc.cprint("5) secondary attack filename : "+settings['sec_attack'],settings['color'])
+		tc.cprint("4) Primary attack filename : "+settings['attack'],settings['color'])
+		tc.cprint("5) Secondary attack filename : "+settings['sec_attack'],settings['color'])
 		tc.cprint("6) Payload filename : "+settings['payload'],settings['color'])
-		tc.cprint("7) Interface : "+settings['interface'],settings['color'])
+		tc.cprint("7) Communication Interface : "+settings['interface'],settings['color'])
 		tc.cprint("8) Append mode : "+settings['append_mode'],settings['color'])
 		tc.cprint("9) Record mode : "+settings['recordmode'],settings['color'])
 		tc.cprint("10) Exit",settings['color'])
@@ -139,7 +143,7 @@ def start_action(a):
 			continue
 
 def stop_action(a):
-	print(" press ctrl+c when you need to stop "+a)
+	print(" Press ctrl+c when you want to stop current recording process. "+a)
 
 
 def show_id(l):
@@ -190,21 +194,27 @@ def analysis(cn):
 			show_exit()
 			break
 		elif z == 0:
-			print("writing payload")
-			cn.write(df7,settings['filemode'],settings['payload'])
-			play_payload(cn)
+			print("Brewing payload")
+			cn.write(df7,settings['filemode'],settings['payload']+'.log')
+			play_payload(cn,"")
 		elif z < len(l)+2:
-			print("writing payload")
+			print("Brewing payload")
 			df4 = df3.loc[df3.id==l[z-2]]
 			df4 = df4.reset_index()
-			cn.write(df4,settings['filemode'],settings['payload'])
+			cn.write(df4,settings['filemode'],settings['payload'] +'_'+str(l[z-2])+'.log')
+			try:
+				play_payload(cn,str(l[z-2]))
+			except Exception as e:
+				print(e)
+				input()
+
 				
 
 
 
-def play_payload(cn):
-	playthread = threading.Thread(target = cn.canplay,args=(settings['payload'],))
-	showthread = threading.Thread(target = cn.show_log,args=(settings['payload'],"all"))
+def play_payload(cn,x):
+	playthread = threading.Thread(target = cn.canplay,args=(settings['payload'] + '_'+str(x)+'.log',))
+	showthread = threading.Thread(target = cn.show_log,args=(settings['payload']+ '_'+str(x)+'.log',str(x),))
 	showthread.start()
 	playthread.start()
 	showthread.join()
@@ -214,18 +224,18 @@ def connect_to_Telegram():
 	while True:
 		try:
 			if settings['API_Token'] is None:
-				z = input("Enter the telegram API token : ")
+				z = input("Enter the telegram-bot API token : ")
 			else:
 				try:
 					z = settings['API_Token']
 				except:
-					z = input("Enter the telegram API token : ")
+					z = input("Enter the telegram-bot API token : ")
 			bot = Bot(token=z)
 			print("connected with telegram")
 			print("send 'menu' from telegram bot to see availiable options")
 			return bot
 		except:
-			print("Invalid API token key, try again...")
+			print("Invalid API token key, Please try again...")
 def get_new_message(bot,update_id=None):
 	while  True:
 		try:
@@ -243,6 +253,18 @@ def upload(bot,msg,filename):
 	else:
 		bot.send_message(chat_id=chat_id,text=str(filename)+" not available")
 
+def rm(f):
+	if os.path.isfile(f): return os.unlink(f)
+    #raise TypeError, 'must be either file or directory'
+
+
+def clean():
+	for f in os.listdir(os.getcwd()+'/data'):
+		rm(os.getcwd()+'/data/'+f)
+
+def data_list():
+	return [f for f in os.listdir(os.getcwd()+'/data')]
+
 def exec_message(bot,msg,cn):
 	text = msg.message.text
 	chat_id = msg.message.chat_id
@@ -252,7 +274,11 @@ def exec_message(bot,msg,cn):
 	elif text[0] == 'play':
 		if len(text) == 4:
 			for i in range(int(text[1])):
-				telegram_play(bot,msg,settings[text[2]],cn,text[3])
+				try:
+					telegram_play(bot,msg,settings[text[2]],cn,str(text[3]))
+				except Exception as e:
+					raise e
+
 		else:
 			for i in range(int(text[1])):
 				telegram_play(bot,msg,settings[text[2]],cn)
@@ -260,10 +286,18 @@ def exec_message(bot,msg,cn):
 		telegram_analyse(bot,msg,settings[text[1]],settings[text[2]],cn)
 
 	elif text[0] == 'get' or text[0] == 'download':
-		upload(bot,msg,settings[text[1]])
+		upload(bot,msg,'data/'+text[1]+'.log')
 	elif text[0] == 'menu' or text[0] == 'whatcanido':
 		options = ["'record (source / attack) (seconds)' to record the files ","'play (no_of times) (filename) (can_id {optional})' to play the recorded/analysed files","'analyse source attack' to analyse the files","'get (source / attack / payload)' to download any file"]
 		bot.send_message(chat_id=chat_id,text="\n".join(options))
+	elif text[0] == 'clean':
+		clean()
+		bot.send_message(chat_id=chat_id,text="data erased!")
+	elif text[0] == 'list':
+		list_of_files = data_list()
+		bot.send_message(chat_id=chat_id,text="\n".join(list_of_files))
+
+
 
 	else:
 		bot.send_message(chat_id=chat_id,text="Invalid command type 'Menu' for manual")
@@ -279,19 +313,20 @@ def telegram_record(bot,msg,filename,cn,time=0):
 def telegram_play(bot,msg,filename,cn,can_id=None):
 	chat_id = msg.message.chat_id
 	bot.send_message(chat_id=chat_id,text="executing payload")
+
 	print(can_id)
 	if can_id != None:
-		df = cn.read(filename)
+		df = cn.read(settings['payload']+'.log',settings['recordmode'])
 		print(df)
 		print(df.loc[df.id==can_id])
 		df = df.loc[df.id==can_id]
 		df = df.reset_index()
 		print(df)
-		cn.write(df,settings['filemode'],'payload_id.log')
-		cn.canplay('payload_id.log')
+		cn.write(df,settings['filemode'],settings['payload']+'_'+str(can_id)+'.log')
+		cn.canplay(settings['payload']+'_'+str(can_id)+'.log')
 	else:
-		cn.canplay(filename)
-	bot.send_message(chat_id=chat_id,text="payload execution completed !")
+		cn.canplay(settings['payload']+'.log')
+	bot.send_message(chat_id=chat_id,text="Payload execution completed !")
 
 
 
@@ -302,9 +337,9 @@ def telegram_analyse(bot,msg,source,attack,cn):
 	source = cn.read(source,settings['recordmode'])
 	attack = cn.read(attack,settings['recordmode'])
 	payload = cn.refine(source,attack)
-	cn.write(payload,settings['filemode'],settings['payload'])
+	cn.write(payload,settings['filemode'],settings['payload']+'.log')
 	bot.send_message(chat_id=chat_id,text="analysis completed")
-	bot.send_message(chat_id=chat_id,text="written payload at "+settings['payload'])
+	bot.send_message(chat_id=chat_id,text="written payload at "+settings['payload']+'.log')
 	bot.send_message(chat_id=chat_id,text="Suspected IDs are")
 	ids = cn.unique_ids(payload)
 	bot.send_message(chat_id=chat_id,text='\n'.join(ids))
@@ -403,10 +438,10 @@ def main():
 						try:
 							pl = input("Record mode (on/off) : ")
 							if pl=='on':
-								settings['recordmode'] = 1
+								settings['recordmode'] = 'on'
 								break
 							elif pl=='off':
-								settings['recordmode'] = 0
+								settings['recordmode'] = 'off'
 								break
 							else:
 								print('Type "on" or "off"')

@@ -1,3 +1,4 @@
+from logging import exception
 import os
 import pandas as pd
 import  sys
@@ -18,8 +19,8 @@ class Canalyse():
         self.config = {}
         self.config['interface'] = interface
         self.bus = Bus(self.channel,**self.config)
-    def candump(self,filename,secs=0):
 
+    def candump(self,filename,secs=0):
         try:
             if int(secs) != 0:
                 t_end = time.time() + int(secs) # chiplevelclocktime + mentioned time.
@@ -55,10 +56,17 @@ class Canalyse():
                     res[3] = res[3].strip('\n')
                     if res[3] not in data.loc[data.id == res[2]].data.to_list():
                         data.at[data.shape[0]] = res
-                except:
-                    pass
+                except Exception as e:
+                    print(e,line,'here')
         if recordmode == 'on':
-            Canalyse.write(data,'a+','db.log')
+        	if not os.path.isfile('data/db.log'):
+        		with open( 'data/db.log' , 'w+' )  as  file:
+        			pass
+        		
+        	d1 = Canalyse.read(self,'data/db.log','off')
+        	x  = Canalyse.refine(self,d1,data)
+        	Canalyse.write(self,x,'a+','data/db.log')
+        	return x
         return data
 
     def write(self,df,filemode,filename): # converting our format to logfile format.
@@ -67,6 +75,7 @@ class Canalyse():
                 m = [df.loc[i,'timestamp'],df.loc[i,'channel'],df.loc[i,'id']+'#'+df.loc[i,'data']+'\n']
                 t = " ".join(m)
                 file.write(t)
+
     def refine(self,source,attack):
         data = pd.DataFrame(columns=['timestamp','channel','id','data'])
         new_ids = Canalyse.unique_ids(self,attack)
@@ -81,6 +90,7 @@ class Canalyse():
                     res = [x.loc[j,'timestamp'],x.loc[j,'channel'],x.loc[j,'id'],x.loc[j,'data']]
                     data.at[data.shape[0]] = res
         return data
+        
     def match(self,attack1,attack2):
     	data = pd.DataFrame(columns=['timestamp','channel','id','data'])
     	new_ids = Canalyse.unique_ids(self,attack1)
@@ -115,6 +125,3 @@ class Canalyse():
     	f2.write(s)
     	f.close()
     	f2.close()
-
-
-
