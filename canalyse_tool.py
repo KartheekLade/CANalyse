@@ -287,7 +287,7 @@ def exec_message(bot,msg,cn):
 	elif text[0] == 'get' or text[0] == 'download':
 		upload(bot,msg,'data/'+text[1]+'.log')
 	elif text[0] == 'menu' or text[0] == 'whatcanido':
-		options = ["'record (source / attack) (seconds)' to record the files ","'play (no_of times) (filename) (can_id {optional})' to play the recorded/analysed files","'analyse source attack' to analyse the files","'get (source / attack / payload)' to download any file"]
+		options = ["'record (source / attack) (seconds)' to record the files ","'play (no_of times) (filename) (can_id {optional})' to play the recorded/analysed files","'analyse source attack' to analyse the files","'get (source / attack / payload)' to download any file","'list' to view contents of data folder","'clean' to erase the contents of data folder."]
 		bot.send_message(chat_id=chat_id,text="\n".join(options))
 	elif text[0] == 'clean':
 		clean()
